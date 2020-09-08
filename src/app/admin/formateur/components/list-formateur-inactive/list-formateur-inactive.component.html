@@ -1,0 +1,88 @@
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) 
+    <section class="content-header"> 
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>General Form</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">General Form</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  -->
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div style="padding-top: 50px !important;" class="row">
+          <!-- left column -->
+          <div class="col-12">
+            <div class="container">
+             
+              <h4 class="mb-5"> List Formateur Inactive</h4>
+              <div>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="form-inline mb-2">
+                      <i class="fas fa-search mr-2"></i>
+                      <input
+                        type="text"
+                        class="form-control"
+                       
+                        name="term"
+                        placeholder="Search"
+                        [(ngModel)]="term"
+                      />
+                    </div>
+                  </div>
+                </div>
+            
+                <table class="table  text-center">
+                  <thead>
+                    <tr>
+                      <th>Firstname</th>
+                      <th>Lastname</th>
+                      <th>Email</th>
+                      <th>Phone</th>
+                      <th>Fonction</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor=" let formateur of formateurs |filter:term | paginate
+                      : {
+                          id: 'listin-pag',
+                          itemsPerPage: 3,
+                          currentPage: page,
+                          totalItems: total
+                        }"
+                    >
+                   
+                    <td>{{ formateur.nom | titlecase }}</td>
+                    <td>{{ formateur.prenom | titlecase }}</td>
+                    <td>{{ formateur.email }}</td>
+                    <td>{{ formateur.tele }}</td>
+                    <td>{{ formateur.fonction | titlecase }}</td>
+                  
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+             
+          </div>
+        </div>
+        
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  

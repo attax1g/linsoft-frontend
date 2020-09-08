@@ -1,0 +1,91 @@
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
+ 
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-12">
+            <div class="container">
+           
+              <h4 class="mb-5"> List Fournisseur Inactive</h4>
+              <div>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="form-inline mb-2">
+                      <i class="fas fa-search mr-2"></i>
+                      <input
+                        type="text"
+                        class="form-control"
+                       
+                        name="term"
+                        placeholder="Search"
+                        [(ngModel)]="term"
+                      />
+                    </div>
+                  </div>
+                </div>
+            
+                <table class="table  text-center">
+                  <thead>
+                    <tr>
+                      <th>Nom Fournisseur</th>
+                      <th>Address Fournisseur</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor=" let item_fournissuer of fournisseurs |filter:term | paginate
+                      : {
+                          id: 'listin-pag',
+                          itemsPerPage: 5,
+                          currentPage: page,
+                          totalItems: total
+                        }"
+                    >
+                 
+                    <td>{{ item_fournissuer?.nom_fournisseur   | titlecase }}</td>
+                    <td *ngIf="item_fournissuer?.address.length < 30" >{{ item_fournissuer?.address   | titlecase   }}</td>
+                    <td *ngIf="item_fournissuer?.address.length > 30" >{{ (item_fournissuer?.address  | titlecase | slice:0:30) + ' ...' }}</td>     
+                    <td>
+                      <button
+                    [routerLink]="['/admin/fournisseur/show-fournisseur-inactive', item_fournissuer.id]"
+                      class="btn btn-primary mr-2"
+                    >
+                      <i class="fas fa-info-circle"></i> Detail
+                    </button>
+                    </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="text-right mt-3">
+                  <pagination-controls
+                    id="listin-pag"
+                    (pageChange)="page = $event"
+                    (pageBoundsCorrection)="page = $event"
+                    maxSize="10"
+                    directionLinks="true"
+                    autoHide="true"
+                    responsive="true"
+                    previousLabel="Previous"
+                    nextLabel="Next"
+                    screenReaderPaginationLabel="Pagination"
+                    screenReaderPageLabel="page"
+                    screenReaderCurrentLabel="You're on page"
+                  >
+                  </pagination-controls>
+                </div>
+              </div>
+             
+          </div>
+        </div>
+        
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->

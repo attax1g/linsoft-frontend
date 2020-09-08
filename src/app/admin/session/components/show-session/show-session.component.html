@@ -1,0 +1,36 @@
+<div class="content-wrapper">
+    
+    <section class="content">
+   
+      <div class="container-fluid">
+        <div style="padding-top: 50px !important;" class=" text-right mt-5">
+            <button routerLink="/admin/session/list-session" class="btn btn-success mr-2">
+              <i class="fas fa-arrow-alt-circle-left"></i> Back
+            </button>
+          </div>
+          <div class="row mb-2 mt-4">
+            <div class="col-12 col-sm-6 col-md-12 col-lg-12 ">
+                <div class="card bg-light">
+                 
+                  <div class="card-body pt-5">
+                    <div class="row">
+                      <div class="col-12">
+                        <p class="lead text-muted"> Référence Cours:   <b>{{Result?.ref_formation   | titlecase }}</b>  </p>
+                        <p class="lead text-muted">Date Début Session:  <b> {{Result?.date_debut   | date}}</b></p>
+                        <p class="lead text-muted">Date Fin Session:  <b>  {{Result?.date_fin   | date }} </b></p>
+                        <p class="lead text-muted">Type Session:  <b> {{Result?.type   | titlecase }}</b></p>
+                        <p class="lead text-muted">Langue Session:  <b>  {{Result?.langue   | titlecase }} </b></p>
+                        <p class="lead text-muted">Lieu Session:  <b>  {{Result?.lieu   | titlecase }} </b></p>
+                        <p class="lead text-muted">Address Session:  <b> {{Result?.address   | titlecase }}</b></p>
+                        <p class="lead text-muted">Etat Session:  <b>  {{Result?.etat_session   | titlecase }} </b></p>
+                      </div>
+                     
+                    </div>
+                  </div>
+        
+                </div>
+              </div>
+          </div>
+      </div>
+  </section>
+</div>

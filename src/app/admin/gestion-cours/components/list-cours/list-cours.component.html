@@ -1,0 +1,118 @@
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
+ 
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-12">
+            <div class="container">
+              <div class="text-right">
+                <button routerLink="/admin/cours/add-cours" class="btn btn-info mt-5 mb-4">
+                  <i class="fas fa-plus"></i> Add cours
+                </button>
+              </div>
+              <h4 class="mb-5"> List cours Active</h4>
+              <div>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="form-inline mb-2">
+                      <i class="fas fa-search mr-2"></i>
+                      <input
+                        type="text"
+                        class="form-control"
+                       
+                        name="term"
+                        placeholder="Search"
+                        [(ngModel)]="term"
+                      />
+                    </div>
+                  </div>
+                </div>
+            
+                <table class="table  text-center">
+                  <thead>
+                    <tr>
+                      <th>Référence Cours</th>
+                      <th>Désignation Cours</th>
+                      <th>Catégorie Cours</th>
+                      <th>Version Cours</th>
+                      <th>Durée Cours</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor=" let item_cours of cours |filter:term | paginate
+                      : {
+                          id: 'listin-pag',
+                          itemsPerPage: 3,
+                          currentPage: page,
+                          totalItems: total
+                        }"
+                    >
+                 
+                    <td>{{ item_cours.ref_form   | titlecase }}</td>
+                    <td *ngIf="item_cours.designation.length < 30" >{{ item_cours.designation   | titlecase   }}</td>
+                    <td *ngIf="item_cours.designation.length > 30" >{{ (item_cours.designation   | titlecase | slice:0:30) + ' ...' }}</td>
+                    <td>{{ item_cours.categorie   | titlecase }}</td>             
+                    <td>{{ item_cours.version   | titlecase }}</td>
+                    <td>{{ item_cours.duree   | titlecase }}</td>
+
+                      <td>
+                        <button
+                      [routerLink]="['/admin/cours/show-cours', item_cours.id]"
+                        class="btn btn-primary mr-2"
+                      >
+                        <i class="fas fa-info-circle"></i> Detail
+                      </button>
+                        <button
+                       
+                       
+                        [routerLink]="['/admin/cours/edit-cours', item_cours.id]"
+                        
+                          class="btn btn-warning text-white mr-2"
+                        >
+                          <i class="fas fa-edit"></i> Edit
+                        </button>
+            
+                        <button (click)="deleteCours(item_cours.id)" class="btn btn-danger">
+                          <i class="far fa-trash-alt"></i> Delete
+                        </button>
+                      </td>
+                  
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="text-right mt-3">
+                  <pagination-controls
+                    id="listin-pag"
+                    (pageChange)="page = $event"
+                    (pageBoundsCorrection)="page = $event"
+                    maxSize="10"
+                    directionLinks="true"
+                    autoHide="true"
+                    responsive="true"
+                    previousLabel="Previous"
+                    nextLabel="Next"
+                    screenReaderPaginationLabel="Pagination"
+                    screenReaderPageLabel="page"
+                    screenReaderCurrentLabel="You're on page"
+                  >
+                  </pagination-controls>
+                </div>
+              </div>
+             
+          </div>
+        </div>
+        
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+

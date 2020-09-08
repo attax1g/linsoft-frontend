@@ -1,0 +1,86 @@
+<div class="content-wrapper">
+    
+    <section class="content">
+   
+      <div class="container-fluid">
+           <!--exemple modal-->
+           <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form  [formGroup]="AddressForm" (ngSubmit)="onSubmitAddress()" >
+                  <div class="input-group mb-3">
+                      <input type="text" formControlName="address" [ngClass]="{ 'is-invalid': submittedAdress && fa.address.errors }" class="form-control" placeholder="Address">
+                     
+                      <div *ngIf="submitted && fa.address.errors" class="invalid-feedback">
+                        <div *ngIf="fa.address.errors.required">Address is required</div>
+                       
+                    </div>
+                    </div> 
+                  
+                    
+                    <!-- /.col -->
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-outline-dark" >Save</button>
+                    </div>
+                    <!-- /.col -->
+                
+                </form>
+            </div>
+          
+          </ng-template>
+                          <!-- end  exemple modal-->
+        <div style="padding-top: 50px !important;" class=" text-right mt-5">
+          <button routerLink="/admin/fournisseur/list-fournisseur" class="btn btn-success mr-2">
+            <i class="fas fa-arrow-alt-circle-left"></i> Back
+          </button>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12 text-center mb-4">
+            <h1> Edit Fournisseur</h1>
+          </div>
+            <div class="col-12 col-md-6 mx-auto">
+                <form  [formGroup]="FournisseurForm" (ngSubmit)="onSubmit()" >
+                    <div class="input-group mb-3">
+                        <input type="text" formControlName="nom_fournisseur" [ngClass]="{ 'is-invalid': submitted && f.nom_fournisseur.errors }" class="form-control" placeholder="Name Fournisseur">
+                        <button  (click)="open(content)" type="button" class="btn btn-info ml-2">
+                          <i class="fas fa-plus"></i> 
+                        </button>
+                        <div *ngIf="submitted && f.nom_fournisseur.errors" class="invalid-feedback">
+                          <div *ngIf="f.nom_fournisseur.errors.required">name fournisseur is required</div>
+                         
+                      </div>
+                      </div> 
+                      <div class="input-group mb-3" *ngFor="let item of fournisseurs" >
+                        <input type="text" #add [value]="item.address" class="form-control" placeholder="Address">
+                        <button type="button"
+                              (click)="editAddress(add.value,item.id)"
+                          class="btn btn-warning mx-2"
+                        >
+                          <i class="fas fa-edit"></i> 
+                        </button>
+                        <button type="button"
+                        (click)="deleteAddress(item.id)"
+                    class="btn btn-danger"
+                  >
+                    <i class="fas fa-trash-alt"></i> 
+                  </button>
+                      </div>
+                    <div class="row">
+                      
+                      <!-- /.col -->
+                      <div class="col-12 mb-4 text-center">
+                        <button type="submit" class="btn btn-dark btn-block ">Submit</button>
+                      </div>
+                      <!-- /.col -->
+                    </div>
+                  </form>
+            </div>
+        </div>
+      </div>
+  </section>
+</div>
